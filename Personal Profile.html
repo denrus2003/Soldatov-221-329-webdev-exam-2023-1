@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Личный кабинет</title>
+        <!--Подключение JS файла -->
+        <script src="Personal_Profile.js"></script>
+        <!--Подключение CSS стилей -->
+        <link rel="stylesheet" href="Personal_Profile.css">
+    </head>
+    <body>
+<!-- Шапка сайта-->
+<header>
+<h1>Заголовок сайта</h1>
+<img src="logo.png" alt="Логотип">
+<nav>
+    <a href="main_page.html">Главная</a>
+</nav>
+</header>
+    <!-- Область для всплывающих уведомлений -->
+    <div id="alerts"></div>
+
+    <!-- Таблица заявок -->
+<table id="requestsTable">
+    <thead>
+        <tr>
+            <th>№</th>
+            <th>Название маршрута</th>
+            <th>Дата</th>
+            <th>Стоимость</th>
+            <th></th> 
+        </tr>
+    </thead>
+    <tbody id="requests">
+        <!-- Здесь будут отображаться заявки -->
+    </tbody>
+</table>
+
+    <!-- Навигационная панель -->
+    <div id="pagination"></div>
+
+    <!-- Футер -->
+    <footer>
+        <p>Контактные данные</p>
+    </footer>
+
+    <!-- Модальное окно с подробной информацией о заявке -->
+    <div id="detailsModal" class="hidden">
+        <!-- Здесь будет отображаться подробная информация о заявке -->
+    </div>
+
+    <!-- Модальное окно для редактирования заявки -->
+    <div id="editModal" style="display: none;">
+        <!-- Здесь будет форма для редактирования заявки -->
+    </div>
+
+    <!-- Модальное окно для подтверждения удаления заявки -->
+    <div id="deleteModal" style="display: none;">
+        <!-- Здесь будет форма для подтверждения удаления заявки -->
+    </div>
+    </body>
+
+
+
+</html>
