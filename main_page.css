@@ -1,0 +1,61 @@
+/* Стили для шапки сайта */
+.navbar {
+    background-color: #007ffe;
+}
+
+.navbar-brand img {
+    height: 40px;
+}
+
+/* Стили для блока с изображением и описанием компании */
+.container img {
+    max-width: 100%;
+}
+
+.container h2, .container p {
+    padding: 15px 0;
+}
+
+/* Стили для блока с информацией о достоинствах компании */
+.container h3 {
+    padding: 10px 0;
+}
+
+/* Стили для футера */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    text-align: center;
+}
+
+/* Стили для светлой темы */
+@media (prefers-color-scheme: light) {
+    body {
+        background-color: #ffffff;
+        color: #000000;
+    }
+
+    .navbar {
+        background-color: #f8f9fa;
+    }
+
+    footer {
+        background-color: #f8f9fa;
+    }
+}
+
+/* Стили для темной темы */
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000000;
+        color: #ffffff;
+    }
+
+    .navbar {
+        background-color: #343a40;
+    }
+
+    footer {
+        background-color: #343a40;
+    }
+}
