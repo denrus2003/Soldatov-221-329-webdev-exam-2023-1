@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 'use strict';
 // Функция для отображения гидов при выборе маршрута
 function showGuides(routeId) {
@@ -43,31 +44,6 @@ function showGuides(routeId) {
     request.send();
 }
 
-// Получение элемента select с маршрутами
-var routeSelect = document.getElementById('routes');
-
-// eslint-disable-next-line max-len
-// Добавление обработчика событий для вызова функции showGuides при выборе маршрута
-routeSelect.addEventListener('change', function() {
-    showGuides(this.value);
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    // eslint-disable-next-line max-len
-// Добавление обработчика событий для вызова функции showGuides при выборе маршрута
-    // Получение элемента select с маршрутами
-    var routeSelect = document.getElementById('routes');
-
-    // eslint-disable-next-line max-len
-    // Добавление обработчика событий для вызова функции showGuides при выборе маршрута
-    if (routeSelect) {
-        routeSelect.addEventListener('change', function() {
-            showGuides(this.value);
-        });
-    } else {
-        console.error('Элемент с идентификатором "routes" не найден');
-    }
-});
 
 // Функция для отправки заказа
 function submitOrder() {
@@ -87,7 +63,7 @@ function submitOrder() {
     var data = {
         routeId: document.getElementById('routes').value,
         guideId: document.getElementById('guideSelect').value,
-        // Добавьте здесь другие данные формы
+       
     };
 
     // Преобразование данных в формат x-www-form-urlencoded
@@ -114,42 +90,174 @@ function submitOrder() {
     // Отправка запроса
     request.send(formData);
 }
-//Функция для получения данных о пешеходных маршрутах
 function fetchRoutes() {
-    // URL API для получения данных о маршрутах
-//eslint-disable-next-line max-len
+    var selectedRouteId = document.getElementById('routes').value;
+    // eslint-disable-next-line max-len
     var apiUrl = "http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes?api_key=d71c466e-977a-4208-8a10-75063f17000f";
-
-    // Создание нового объекта запроса
     var request = new XMLHttpRequest();
-
-    // Инициализация нового запроса
     request.open('GET', apiUrl, true);
-
-    // Обработка ответа
     request.onload = function () {
-        if (request.status >= 200 && request.status < 400) {
-            // Успешный ответ
-            var routes = JSON.parse(request.responseText);
+        function displayRouteDetails() {
+            var select = document.getElementById('routes');
+            var selectedRouteId = select.value;
+            var selectedRoute = select.options[select.selectedIndex].text;
 
-            // Обновление блока с данными о маршрутах
-            var container = document.getElementById('routes');
-            container.innerHTML = '<option value="">Выберите маршрут</option>';
-            for (var i = 0; i < routes.length; i++) {
-                var route = document.createElement('option');
-                route.textContent = routes[i].name;
-                container.appendChild(route);
+            var apiUrl = "http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes/" + selectedRouteId + "?api_key=d71c466e-977a-4208-8a10-75063f17000f";
+            var request = new XMLHttpRequest();
+            request.open('GET', apiUrl, true);
+            request.onload = function () {
+                if (request.status >= 200 && request.status < 400) {
+                    var data = JSON.parse(request.responseText);
+                    var details = document.getElementById('route-details');
+                    details.textContent = 'Название: ' + data.name + ', Описание: ' + data.description;
+
+                    var button = document.createElement('button');
+                    button.textContent = 'Выбрать';
+                    button.addEventListener('click', function () {
+                        showGuides(selectedRouteId);
+                    });
+                    details.append(button);
+                } else {
+                    console.error('Ошибка при получении маршрутов: ' + request.status);
+                }
+            };
+            request.send();
+        }
+
+
+        if (request.status >= 200 && request.status < 400) {
+            var data = JSON.parse(request.responseText);
+            var select = document.getElementById('routes');
+            select.innerHTML = '<option value="">Выберите маршрут</option>';
+            data.forEach(route => {
+                var option = document.createElement('option');
+                option.value = route.id;
+                option.textContent = route.name;
+                select.append(option);
+            });
+            select.addEventListener('change', displayRouteDetails);
+        } else {
+            console.error('Ошибка при получении маршрутов: ' + request.status);
+        }
+    };
+    request.send();
+}
+
+// Функция для поиска маршрута
+function searchRoute() {
+    // Получаем идентификатор выбранного маршрута из элемента ввода с идентификатором 'route-id'
+    var selectedRouteId = document.getElementById('routes').value;
+
+    // Создаем URL для запроса к API, добавляя идентификатор выбранного маршрута к базовому URL
+    var guidesUrl = "http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes/" + selectedRouteId + "/guides";
+
+    // Создаем новый объект XMLHttpRequest для выполнения запроса к API
+    var guidesRequest = new XMLHttpRequest();
+
+    // Открываем новый GET-запрос к указанному URL
+    guidesRequest.open('GET', guidesUrl, true);
+
+    // Добавляем заголовок Authorization с вашим API-ключом
+    guidesRequest.setRequestHeader('Authorization', 'Bearer d71c466e-977a-4208-8a10-75063f17000f');
+
+    // Устанавливаем обработчик события 'load' для запроса
+    guidesRequest.onload = function () {
+    // Если статус ответа находится в диапазоне от 200 до 399, это означает, что запрос был успешным
+        if (guidesRequest.status >= 200 && guidesRequest.status < 400) {
+        // Парсим ответ от сервера как JSON
+            var guidesData = JSON.parse(guidesRequest.responseText);
+
+            // Получаем элемент списка гидов по идентификатору 'guides-list'
+            var guidesList = document.getElementById('guides-list');
+
+            // Очищаем список гидов
+            guidesList.innerHTML = '';
+
+            // Проходим по всем гидам в ответе от сервера
+            for (var i = 0; i < guidesData.length; i++) {
+            // Получаем текущего гида
+                var guide = guidesData[i];
+
+                // Создаем новый элемент списка
+                var listItem = document.createElement('li');
+
+                // Устанавливаем текст элемента списка равным имени гида
+                listItem.textContent = guide.name;
+                // Добавляем элемент списка в список гидов
+                guidesList.appendChild(listItem);
             }
         } else {
-            // Обработка ошибок
-            // eslint-disable-next-line max-len, max-len, max-len
-            console.error('Ошибка при получении данных о маршрутах: ' + request.status);
+            // Если статус ответа находится вне диапазона от 200 до 399, это означает, что произошла ошибка
+            console.error('Ошибка сервера: ' + guidesRequest.status);
         }
     };
 
-    // Отправка запроса
+    // Устанавливаем обработчик события 'error' для запроса
+    guidesRequest.onerror = function() {
+        // Выводим сообщение об ошибке в консоль
+        console.error('Ошибка при выполнении запроса');
+    };
+
+    // Отправляем запрос
+    guidesRequest.send();
+}
+
+document.getElementById('search-button').addEventListener('click', searchRoute);
+
+
+// Добавление обработчика событий к кнопке "Поиск"
+document.addEventListener('DOMContentLoaded', function() {
+    var searchButton = document.getElementById('search-button');
+    if (searchButton) {
+        searchButton.addEventListener('click', searchRoute);
+    } else {
+        console.error('Элемент с идентификатором "search-button" не найден на странице');
+    }
+
+    // Получение элемента select с маршрутами
+    var routeSelect = document.getElementById('route-id');
+
+    // Добавление обработчика событий для вызова функции showGuides при выборе маршрута
+    if (routeSelect) {
+        routeSelect.addEventListener('change', function() {
+            var selectedRouteId = this.value;
+            var url = 'http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes/' + selectedRouteId + '/guides?api_key=d71c466e-977a-4208-8a10-75063f17000f';
+            // Затем используйте url для выполнения запроса
+        });
+    } else {
+        console.error('Элемент с идентификатором "routes" не найден на странице');
+    }
+});
+function displayRouteDetails() {
+    var select = document.getElementById('routes');
+    var selectedRouteId = select.value;
+    var selectedRoute = select.options[select.selectedIndex].text;
+
+    var apiUrl = "http://exam-2023-1-api.std-900.ist.mospolytech.ru/api/routes/" + selectedRouteId + "?api_key=d71c466e-977a-4208-8a10-75063f17000f";
+    var request = new XMLHttpRequest();
+    request.open('GET', apiUrl, true);
+    request.onload = function () {
+        if (request.status >= 200 && request.status < 400) {
+            var data = JSON.parse(request.responseText);
+            var details = document.getElementById('route-details');
+            details.textContent = 'Название: ' + data.name + ', Описание: ' + data.description;
+
+            var button = document.createElement('button');
+            button.textContent = 'Выбрать';
+            button.addEventListener('click', function () {
+                showGuides(selectedRouteId);
+            });
+            details.append(button);
+        } else {
+            // eslint-disable-next-line max-len
+            console.error('Ошибка при получении подробных данных о маршруте: ' + request.status);
+        }
+    };
     request.send();
 }
+
+fetchRoutes();
+
 $(document).ready(function() {
     $(".btn-primary").click(function() {
         $("#orderModal").modal('show');
