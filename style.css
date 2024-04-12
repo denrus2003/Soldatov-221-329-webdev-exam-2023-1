@@ -1,0 +1,64 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    color: #ffffff; /* Серый */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-color: #FF00FF; /* Фуксия */
+}
+
+main {
+    flex-grow: 1;
+    background-color: #808080; /* Красный */
+}
+
+.slogan {
+    color: #ffffff; /* Фиолетовый */
+    font-size: 0.5rem;
+    text-align: center;
+}
+
+.about-text {
+    text-indent: 2rem;
+    font-size: large;
+    padding: 0 20px;
+    color: #ffffff; /* Розовый */
+}
+
+img {
+    max-width: 100%;
+}
+
+.about-image {
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover;
+}
+
+.gallery-image {
+    object-fit: cover;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+    background-color: #808080; 
+}
+
+.y-scrollable {
+    overflow-y: scroll;
+}
+
+.modal * {
+    overflow: hidden;
+    color: black;
+}
+
+.selected-row {
+    background-color: #a600ff; /* Серый */
+}

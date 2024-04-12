@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="colors.css">
+
+    <title>Туристическая компания "Сияющая звезда"</title>
+</head>
+<body>
+    <header class="p-3 mb-3 border-bottom">
+        <div class="container-md">
+            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-start">
+                <a href="index.html#" class="link-body-emphasis text-decoration-none me-md-1">
+                    <div class="d-flex align-items-center mb-2 mb-lg-0 ">
+                        <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 -960 960 960" width="24"><path d="m120-420 320-460v460H120Zm153-80h87v-125l-87 125Zm227 80q12-28 26-98t14-142q0-72-13.5-148T500-920q61 18 121.5 67t109 117q48.5 68 79 149.5T840-420H500Zm104-80h148q-17-77-55.5-141T615-750q2 21 3.5 43.5T620-660q0 47-4.5 87T604-500ZM360-200q-36 0-67-17t-53-43q-14 15-30.5 28T173-211q-35-26-59.5-64.5T80-360h800q-9 46-33.5 84.5T787-211q-20-8-36.5-21T720-260q-23 26-53.5 43T600-200q-36 0-67-17t-53-43q-22 26-53 43t-67 17ZM80-40v-80h40q32 0 62.5-10t57.5-30q27 20 57.5 29.5T360-121q32 0 62-9.5t58-29.5q27 20 57.5 29.5T600-121q32 0 62-9.5t58-29.5q28 20 58 30t62 10h40v80h-40q-31 0-61-7.5T720-70q-29 15-59 22.5T600-40q-31 0-61-7.5T480-70q-29 15-59 22.5T360-40q-31 0-61-7.5T240-70q-29 15-59 22.5T120-40H80Zm280-460Zm244 0Z"/></svg>
+                        <span class="fs-3">Сияющая звезда</span>
+                    </div>
+                    <div class="slogan fs-6">Экскурсии по Москве</div>
+                </a>
+                <ul class="nav col-12 col-md-auto me-md-auto mb-2 justify-content-center mb-md-0 flex-column flex-sm-row text-center">
+                <li><a href="index.html#section-about"   class="nav-link px-3 link-body-emphasis">О компании</a></li>
+                <li><a href="index.html#section-gallery" class="nav-link px-3 link-body-emphasis">Галлерея</a></li>
+                <li><a href="index.html#section-reviews" class="nav-link px-3 link-body-emphasis">Отзывы</a></li>
+                <li><a href="index.html#section-tours"   class="nav-link px-3 link-body-emphasis">Поиск тура</a></li>
+                </ul>
+                <div class="col-12 col-md-auto mx-auto mx-md-0 mb-3 mb-md-0 d-flex justify-content-center">
+                    
+                    <div class="dropdown text-end">
+                        <a href="#" class="d-block link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="media/1675895563_grizly-club-p-lichnii-kabinet-klipart-14.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small">
+                            <li><a class="dropdown-item" href="index.html">Выйти</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </header>
+    <main>
+        <div id="alerts" class="container-md"></div>
+        <div class="container-md">
+            <section>
+                <h2>Оставленные заявки</h2>
+                <div class="row mt-3" id="orders-header">
+                    <div class="d-none d-lg-block col-1 bg-secondary text-white text-center d-flex flex-center py-2">№</div>
+                    <div class="d-none d-lg-block col-4 bg-secondary text-white text-center d-flex flex-center py-2">Название маршрута</div>
+                    <div class="d-none d-lg-block col-3 bg-secondary text-white text-center d-flex flex-center py-2">Дата</div>
+                    <div class="d-none d-lg-block col-2 bg-secondary text-white text-center d-flex flex-center py-2">Стоимость</div>
+                    <div class="d-none d-lg-block col-2 bg-secondary text-white text-center d-flex flex-center py-2"> </div>
+                </div>
+                <div id="orders-rows" class="mb-3"></div>
+                <div id="orders-page-buttons" class="d-flex flex-center"></div>
+            </section>
+        </div>
+        <div class="modal fade" id="order-view-modal" tabindex="-1" aria-labelledby="order-view-modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="order-view-modal-title">Просмотр заявки</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>ФИО гида: <span id="order-view-modal-name">***</span></div>
+                        <div>Название маршрута: <span id="order-view-modal-route">***</span></div>
+                        <div>Дата экскурсии: <span id="order-view-modal-date">***</span></div>
+                        <div>Время экскурсии: <span id="order-view-modal-time">***</span></div>
+                        <div>Продолжительность экскурсии: <span id="order-view-modal-duration">***</span></div>
+                        <div>Количество человек: <span id="order-view-modal-people">***</span></div>
+
+                        <h4>Дополнительные опции</h4>
+
+                        <div class="row">
+                            <div class="col-12 col-md-6" id="order-view-modal-option1">
+                                <div>Трансфер до метро после экскурсии</div>
+                                <div>Увеличивает стоимость на 25% в выходные дни и на 30% в будние.</div>
+                            </div>
+                            <div class="col-12 col-md-6" id="order-view-modal-option2">
+                                <div>Скидка для пенсионеров</div>
+                                <div>Итоговая стоимость уменьшается на 25%</div>
+                            </div>
+                        </div>
+                        <div>Цена: <span id="order-view-modal-price">***</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="order-edit-modal" tabindex="-1" aria-labelledby="order-edit-modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="order-edit-modal-title">Редактирование заявки</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <label class="form-label">ФИО гида: <span id="order-edit-modal-name">***</span></label> <br>
+                            <label class="form-label">Название маршрута: <span id="order-edit-modal-route">***</span></label>
+                            <div class="row">
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label">Дата экскурсии: </label>
+                                    <input type="date" class="form-control" name="date">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label">Время начала: </label>
+                                    <input type="time" class="form-control" min="09:00" max="23:00" step="900" name="time">
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label">Длительность экскурсии: </label>
+                                    <select class="form-select" name="duration">
+                                        <option value="1">1 час</option>
+                                        <option value="2">2 часа</option>
+                                        <option value="3">3 часа</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-md-4">
+                                    <label class="form-label">Количество человек: </label>
+                                    <input type="number" class="form-control" value="1" min="1" max="30" name="persons">
+                                </div>
+                                <h4 class="my-3">Дополнительные опции</h4>
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <input type="checkbox" class="form-check-input" id="order-edit-modal-option1" name="optionFirst">
+                                        <label class="form-label" for="order-edit-modal-option1">Трансфер до метро после экскурсии</label>
+                                        <p>Увеличивает стоимость на 25% в выходные дни и на 30% в будние.</p>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="checkbox" class="form-check-input" id="order-edit-modal-option2" name="optionSecond">
+                                        <label class="form-label" for="order-edit-modal-option2">Скидка для пенсионеров</label>
+                                        <p>Итоговая цена уменьшается на 25%.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h4>Итоговая стоимость: <span id="order-edit-modal-price">***</span></h4>
+                                </div>
+                                <input type="hidden" id="order-edit-modal-id">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="order-edit-modal-submit">Отправить</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+        <div class="modal fade" id="order-delete-modal" tabindex="-1" aria-labelledby="order-edit-modal-title" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="order-delete-modal-title">Удаление заявки</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы уверены, что хотите удалить эту заявку?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отменить</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="order-delete-modal-submit">Удалить</button>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </main>
+    <footer>
+        <div class="bg-secondary py-4">
+            <div class="container-md">
+                <div class="row my-4">
+                    <div class="col-12 col-md-6 d-flex flex-center">
+                        <p class="text-center text-white mb-0">&copy; ООО «Сияющая звезда», 2024</p>
+                    </div>
+                    <div class="col-12 col-md-6 text-white">
+                        <div class="mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telegram" viewBox="0 0 16 16">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M8.287 5.906c-.778.324-2.334.994-4.666 2.01-.378.15-.577.298-.595.442-.03.243.275.339.69.47l.175.055c.408.133.958.288 1.243.294.26.006.549-.1.868-.32 2.179-1.471 3.304-2.214 3.374-2.23.05-.012.12-.026.166.016.047.041.042.12.037.141-.03.129-1.227 1.241-1.846 1.817-.193.18-.33.307-.358.336a8.154 8.154 0 0 1-.188.186c-.38.366-.664.64.015 1.088.327.216.589.393.85.571.284.194.568.387.936.629.093.06.183.125.27.187.331.236.63.448.997.414.214-.02.435-.22.547-.82.265-1.417.786-4.486.906-5.751a1.426 1.426 0 0 0-.013-.315.337.337 0 0 0-.114-.217.526.526 0 0 0-.31-.093c-.3.005-.763.166-2.984 1.09z"/>
+                            </svg>
+                            <span>@oyster-travel</span>
+                        </div>
+                        <div class="mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                            </svg>
+                            <span>+7(123)456-78-90</span>
+                        </div>
+                        <div class="mb-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at-fill" viewBox="0 0 16 16">
+                                <path d="M2 2A2 2 0 0 0 .05 3.555L8 8.414l7.95-4.859A2 2 0 0 0 14 2zm-2 9.8V4.698l5.803 3.546L0 11.801Zm6.761-2.97-6.57 4.026A2 2 0 0 0 2 14h6.256A4.493 4.493 0 0 1 8 12.5a4.49 4.49 0 0 1 1.606-3.446l-.367-.225L8 9.586l-1.239-.757ZM16 9.671V4.697l-5.803 3.546.338.208A4.482 4.482 0 0 1 12.5 8c1.414 0 2.675.652 3.5 1.671"/>
+                                <path d="M15.834 12.244c0 1.168-.577 2.025-1.587 2.025-.503 0-1.002-.228-1.12-.648h-.043c-.118.416-.543.643-1.015.643-.77 0-1.259-.542-1.259-1.434v-.529c0-.844.481-1.4 1.26-1.4.585 0 .87.333.953.63h.03v-.568h.905v2.19c0 .272.18.42.411.42.315 0 .639-.415.639-1.39v-.118c0-1.277-.95-2.326-2.484-2.326h-.04c-1.582 0-2.64 1.067-2.64 2.724v.157c0 1.867 1.237 2.654 2.57 2.654h.045c.507 0 .935-.07 1.18-.18v.731c-.219.1-.643.175-1.237.175h-.044C10.438 16 9 14.82 9 12.646v-.214C9 10.36 10.421 9 12.485 9h.035c2.12 0 3.314 1.43 3.314 3.034zm-4.04.21v.227c0 .586.227.8.581.8.31 0 .564-.17.564-.743v-.367c0-.516-.275-.708-.572-.708-.346 0-.573.245-.573.791Z"/>
+                            </svg>
+                            <span>contact: denverrus2003@gmail.com</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <template id="template-orders-row">
+        <div class="row mb-3 mb-lg-0">
+            <div class="text-break d-lg-none col-6 bg-secondary text-white text-center d-flex flex-center py-2">№</div>
+            <div class="text-break col-6 col-lg-1 text-center d-flex flex-center py-2 border">123</div>
+            <div class="text-break d-lg-none col-6 bg-secondary text-white text-center d-flex flex-center py-2">Название маршрута</div>
+            <div class="text-break col-6 col-lg-4 text-center d-flex flex-center py-2 border">Домой</div>
+            <div class="text-break d-lg-none col-6 bg-secondary text-white text-center d-flex flex-center py-2">Дата</div>
+            <div class="text-break col-6 col-lg-3 text-center d-flex flex-center py-2 border">01.01.2023</div>
+            <div class="text-break d-lg-none col-6 bg-secondary text-white text-center d-flex flex-center py-2">Стоимость</div>
+            <div class="text-break col-6 col-lg-2 text-center d-flex flex-center py-2 border">1200₽</div>
+            <div class="text-break d-lg-none col-6 bg-secondary text-white text-center d-flex flex-center py-2"> </div>
+            <div class="col-6 col-lg-2 text-center d-flex flex-center py-2 border">
+                <div class="row">
+                    <div class="col-4">
+                        <span class="btn btn-view" data-bs-toggle="modal" data-bs-target="#order-view-modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"/>
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <span class="btn btn-edit" data-bs-toggle="modal" data-bs-target="#order-edit-modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="col-4">
+                        <span class="btn btn-delete" data-bs-toggle="modal" data-bs-target="#order-delete-modal">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                                <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+    <template id="orders-btn-template">
+        <button class="btn btn-secondary"></button>
+    </template>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/library.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+</html>

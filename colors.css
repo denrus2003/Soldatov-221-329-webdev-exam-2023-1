@@ -1,0 +1,38 @@
+body {
+    background-color: #808080;;
+}
+a, .nav-link {
+    color: #ffffff; /* Серый */
+}
+
+.btn-primary {
+    background-color: #FF00FF; /* Фуксия */
+}
+
+a:hover, .nav-link:hover, a:focus, .nav-link:focus {
+    color: #FF0000; /* Красный */
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #800080; /* Фиолетовый */
+}
+
+.btn-primary:disabled {
+    background-color: #FFC0CB; 
+}
+
+.bg-dark {
+    background-color: #808080 !important; 
+}
+
+.bg-secondary, .btn-secondary {
+    background-color: #808080 !important; 
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .dropdown-item:focus {
+    background-color: #FF00FF !important; 
+}
+
+.border, .btn-primary {
+    border-color: #FF0000 !important; 
+}
